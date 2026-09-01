@@ -23,21 +23,21 @@ function ProfileWidget({ content }: { content: Record<string, unknown> }) {
       <div className="flex min-w-0 items-center gap-4">
         <img
           src={avatar}
-          alt={`Foto de ${String(content.full_name)}`}
+          alt={`Foto de ${String(content['full_name'])}`}
           width={512}
           height={512}
           className="size-20 shrink-0 rounded-[1.75rem] object-cover ring-2 ring-primary/40 sm:size-24"
         />
         <div className="min-w-0">
           <h1 className="truncate text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-            {String(content.full_name)}
+            {String(content['full_name'])}
           </h1>
-          <p className="truncate text-sm text-muted-foreground">@{String(content.username)}</p>
+          <p className="truncate text-sm text-muted-foreground">@{String(content['username'])}</p>
         </div>
       </div>
-      <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">{String(content.bio)}</p>
+      <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">{String(content['bio'])}</p>
       <div className="flex flex-wrap gap-2">
-        {(content.tags as string[]).map((tag) => (
+        {(content['tags'] as string[]).map((tag) => (
           <Badge
             key={tag}
             variant="secondary"
@@ -52,11 +52,11 @@ function ProfileWidget({ content }: { content: Record<string, unknown> }) {
 }
 
 function SocialWidget({ content }: { content: Record<string, unknown> }) {
-  const key = String(content.network) as keyof typeof networks;
+  const key = String(content['network']) as keyof typeof networks;
   const net = networks[key] ?? networks.linkedin;
   return (
     <a
-      href={String(content.url)}
+      href={String(content['url'])}
       target="_blank"
       rel="noreferrer noopener"
       className="flex h-full flex-col items-center justify-center gap-3 p-6"
@@ -70,14 +70,14 @@ function SocialWidget({ content }: { content: Record<string, unknown> }) {
 function ShowcaseWidget({ content }: { content: Record<string, unknown> }) {
   return (
     <a
-      href={String(content.url)}
+      href={String(content['url'])}
       target="_blank"
       rel="noreferrer noopener"
       className="group relative flex h-full min-h-44 items-end overflow-hidden"
     >
       <img
         src={showcaseCover}
-        alt={String(content.title)}
+        alt={String(content['title'])}
         loading="lazy"
         width={1024}
         height={576}
@@ -87,9 +87,9 @@ function ShowcaseWidget({ content }: { content: Record<string, unknown> }) {
       <div className="relative flex w-full items-end justify-between gap-4 p-6">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-            {String(content.subtitle)}
+            {String(content['subtitle'])}
           </p>
-          <h2 className="mt-1 text-lg font-bold text-foreground sm:text-xl">{String(content.title)}</h2>
+          <h2 className="mt-1 text-lg font-bold text-foreground sm:text-xl">{String(content['title'])}</h2>
         </div>
         <span className="grid size-11 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
           <Play className="size-4" />
@@ -112,8 +112,8 @@ function NewsletterWidget({ content }: { content: Record<string, unknown> }) {
       }}
     >
       <div>
-        <h2 className="text-lg font-bold text-foreground">{String(content.title)}</h2>
-        <p className="text-sm text-muted-foreground">{String(content.subtitle)}</p>
+        <h2 className="text-lg font-bold text-foreground">{String(content['title'])}</h2>
+        <p className="text-sm text-muted-foreground">{String(content['subtitle'])}</p>
       </div>
       <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 rounded-2xl border border-border/70 bg-background/40 p-1.5">
         <Input
@@ -136,7 +136,7 @@ function MapWidget({ content }: { content: Record<string, unknown> }) {
     <div className="relative h-full min-h-40">
       <img
         src={mapDark}
-        alt={`Mapa de ${String(content.city)}`}
+        alt={`Mapa de ${String(content['city'])}`}
         loading="lazy"
         width={512}
         height={512}
@@ -145,7 +145,7 @@ function MapWidget({ content }: { content: Record<string, unknown> }) {
       <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
       <div className="relative flex h-full flex-col justify-end gap-1 p-5">
         <MapPin className="size-5 text-primary" />
-        <p className="text-sm font-semibold text-foreground">{String(content.city)}</p>
+        <p className="text-sm font-semibold text-foreground">{String(content['city'])}</p>
       </div>
     </div>
   );
@@ -154,13 +154,13 @@ function MapWidget({ content }: { content: Record<string, unknown> }) {
 function LinkWidget({ content }: { content: Record<string, unknown> }) {
   return (
     <a
-      href={String(content.url)}
+      href={String(content['url'])}
       target="_blank"
       rel="noreferrer noopener"
       className="flex h-full flex-col justify-between gap-3 p-6"
     >
       <ArrowUpRight className="size-6 text-primary" />
-      <span className="text-base font-bold leading-snug text-foreground">{String(content.label)}</span>
+      <span className="text-base font-bold leading-snug text-foreground">{String(content['label'])}</span>
     </a>
   );
 }
