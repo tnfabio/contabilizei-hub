@@ -102,10 +102,9 @@
 
   --glass-bg: oklch(0.208 0.042 265.755 / 45%);
   --glass-border: oklch(0.32 0.045 262 / 90%);
-  --glow-primary: 0 0 0 1px oklch(0.606 0.226 292.5 / 45%),
-    0 18px 60px -20px oklch(0.606 0.226 292.5 / 55%);
+  --glow-primary:
+    0 0 0 1px oklch(0.606 0.226 292.5 / 45%), 0 18px 60px -20px oklch(0.606 0.226 292.5 / 55%);
 }
-
 
 .dark {
   --background: oklch(0.145 0.03 265);
@@ -187,8 +186,13 @@
 }
 
 @keyframes bento-wiggle {
-  0%, 100% { transform: rotate(-0.7deg); }
-  50% { transform: rotate(0.7deg); }
+  0%,
+  100% {
+    transform: rotate(-0.7deg);
+  }
+  50% {
+    transform: rotate(0.7deg);
+  }
 }
 
 @utility bento-wiggle {
@@ -197,13 +201,12 @@
 
 @layer base {
   body {
-    background-image:
-      radial-gradient(
-        60% 45% at 50% 0%,
-        oklch(0.606 0.226 292.5 / 22%) 0%,
-        oklch(0.55 0.18 262 / 10%) 40%,
-        transparent 75%
-      );
+    background-image: radial-gradient(
+      60% 45% at 50% 0%,
+      oklch(0.606 0.226 292.5 / 22%) 0%,
+      oklch(0.55 0.18 262 / 10%) 40%,
+      transparent 75%
+    );
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: var(--font-sans);

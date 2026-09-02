@@ -9,7 +9,7 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext, rectSortingStrategy, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { GripVertical, Trash2 } from "lucide-react";
+import { GripVertical, Pencil, Trash2 } from "lucide-react";
 
 import { WidgetBody } from "@/components/BentoWidgets";
 import { Button } from "@/components/ui/button";
@@ -21,14 +21,16 @@ function SortableBlock({
   index,
   editing,
   onRemove,
+  onEdit,
 }: {
   widget: Widget;
   index: number;
   editing: boolean;
-  onRemove: (id: string) => void;
+  onRemove: (id: number | string) => void;
+  onEdit?: (widget: Widget) => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: widget.id,
+    id: String(widget.id),
     disabled: !editing,
   });
 
@@ -54,6 +56,16 @@ function SortableBlock({
         <>
           <div className="absolute inset-0 bg-background/20" />
           <div className="absolute right-2 top-2 flex gap-1.5">
+            {onEdit && (
+              <button
+                type="button"
+                aria-label="Editar bloco"
+                className="grid size-8 cursor-pointer place-items-center rounded-full bg-primary text-primary-foreground"
+                onClick={() => onEdit(widget)}
+              >
+                <Pencil className="size-4" />
+              </button>
+            )}
             <button
               type="button"
               aria-label="Arrastar bloco"
@@ -85,11 +97,13 @@ export function BentoGrid({
   editing,
   onReorder,
   onRemove,
+  onEdit,
 }: {
   widgets: Widget[];
   editing: boolean;
   onReorder: (from: number, to: number) => void;
-  onRemove: (id: string) => void;
+  onRemove: (id: number | string) => void;
+  onEdit?: (widget: Widget) => void;
 }) {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -116,6 +130,7 @@ export function BentoGrid({
               index={index}
               editing={editing}
               onRemove={onRemove}
+              onEdit={onEdit}
             />
           ))}
         </div>
